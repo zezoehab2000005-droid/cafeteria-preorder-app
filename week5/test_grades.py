@@ -19,3 +19,29 @@ def test_below_sixty_fails():
 def test_score_above_100_is_rejected():
     with pytest.raises(ValueError):
         letter_grade(101)
+
+
+# Round 2: boundary tests suggested by the navigator
+def test_zero_is_an_f():
+    assert letter_grade(0) == "F"
+
+
+def test_hundred_is_an_a():
+    assert letter_grade(100) == "A"
+
+
+def test_sixty_is_a_d():
+    assert letter_grade(60) == "D"
+
+
+def test_sixty_nine_is_a_d():
+    assert letter_grade(69) == "D"
+
+
+def test_seventy_is_a_c():
+    assert letter_grade(70) == "C"
+
+
+def test_negative_score_is_rejected():
+    with pytest.raises(ValueError):
+        letter_grade(-1)
