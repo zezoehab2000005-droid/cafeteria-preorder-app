@@ -1,39 +1,39 @@
-def calc(d, t, s, disc, extra=[]):
-    # t: 1=student, 2=staff child, 3=scholarship
+def tuition_fee(courses, kind, summer, discount, extras=[]):
+    # kind: 1=student, 2=staff child, 3=scholarship
     total = 0
-    for c in d:
-        if t == 1:
-            total = total + c["h"] * 350
-        elif t == 2:
-            total = total + c["h"] * 350 * 0.5
-        elif t == 3:
+    for course in courses:
+        if kind == 1:
+            total = total + course["h"] * 350
+        elif kind == 2:
+            total = total + course["h"] * 350 * 0.5
+        elif kind == 3:
             total = total + 0
     if total > 6000:
         total = total - 200
-    if s == True:
+    if summer == True:
         total = total + 150
-    if disc != None:
-        total = total - disc
-    for e in extra:
-        total = total + e
+    if discount != None:
+        total = total - discount
+    for extra in extras:
+        total = total + extra
     return total
 
 
-def report(d, t, s, disc):
-    x = calc(d, t, s, disc)
-    if t == 1:
-        print("Student fee: " + str(x))
-    elif t == 2:
-        print("Staff child fee: " + str(x))
-    if x > 6000:
+def fee_report(courses, kind, summer, discount):
+    fee = tuition_fee(courses, kind, summer, discount)
+    if kind == 1:
+        print("Student fee: " + str(fee))
+    elif kind == 2:
+        print("Staff child fee: " + str(fee))
+    if fee > 6000:
         print("High fee")
-    return x
+    return fee
 
 
-def ProcessAll(students):
-    for st in students:
-        if st["type"] == 1:
-            fee = calc(st["courses"], 1, st["summer"], None)
-        if st["type"] == 2:
-            fee = calc(st["courses"], 2, st["summer"], None)
-        print(st["name"], fee)
+def process_all(students):
+    for student in students:
+        if student["type"] == 1:
+            fee = tuition_fee(student["courses"], 1, student["summer"], None)
+        if student["type"] == 2:
+            fee = tuition_fee(student["courses"], 2, student["summer"], None)
+        print(student["name"], fee)
