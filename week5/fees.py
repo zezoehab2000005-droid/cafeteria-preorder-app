@@ -61,10 +61,10 @@ def fee_report(fee, kind):
 
 
 def process_all(students):
-    """Print the fee of every regular or staff-child student."""
-    for student in students:
-        if student["type"] == StudentType.REGULAR:
-            fee = tuition_fee(student["courses"], StudentType.REGULAR, student["summer"])
-        if student["type"] == StudentType.STAFF_CHILD:
-            fee = tuition_fee(student["courses"], StudentType.STAFF_CHILD, student["summer"])
-        print(student["name"], fee)
+    """Return a {name: fee} dictionary with a fee for every student."""
+    return {
+        student["name"]: tuition_fee(
+            student["courses"], student["type"], student["summer"]
+        )
+        for student in students
+    }
