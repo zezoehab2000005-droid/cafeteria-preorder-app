@@ -1,0 +1,14 @@
+[tool.ruff]
+# legacy_fees.py is kept unchanged on purpose: the characterization tests
+# compare the old code with the new code. Its problems are recorded in
+# docs/week5/before.txt, so it is excluded from the "after" check.
+extend-exclude = ["legacy_fees.py"]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "N", "SIM", "C90", "PLR", "ARG"]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 5
+
+[tool.ruff.lint.per-file-ignores]
+"test_*.py" = ["PLR2004"]

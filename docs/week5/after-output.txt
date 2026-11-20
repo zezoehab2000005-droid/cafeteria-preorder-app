@@ -1,0 +1,38 @@
+$ pytest -v
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-9.2.0, pluggy-1.7.0 -- /usr/bin/python3
+rootdir: week5
+configfile: pyproject.toml
+plugins: platformdirs-4.13.0
+collecting ... collected 16 items
+
+test_fees.py::test_same_result_as_legacy[hours0-1-StudentType.REGULAR-False] PASSED [  6%]
+test_fees.py::test_same_result_as_legacy[hours1-1-StudentType.REGULAR-True] PASSED [ 12%]
+test_fees.py::test_same_result_as_legacy[hours2-2-StudentType.STAFF_CHILD-False] PASSED [ 18%]
+test_fees.py::test_same_result_as_legacy[hours3-3-StudentType.SCHOLARSHIP-True] PASSED [ 25%]
+test_fees.py::test_large_fee_gets_reduction PASSED                       [ 31%]
+test_fees.py::test_scholarship_student_is_not_skipped PASSED             [ 37%]
+test_grades.py::test_ninety_is_an_a PASSED                               [ 43%]
+test_grades.py::test_eighty_nine_is_a_b PASSED                           [ 50%]
+test_grades.py::test_below_sixty_fails PASSED                            [ 56%]
+test_grades.py::test_score_above_100_is_rejected PASSED                  [ 62%]
+test_grades.py::test_zero_is_an_f PASSED                                 [ 68%]
+test_grades.py::test_hundred_is_an_a PASSED                              [ 75%]
+test_grades.py::test_sixty_is_a_d PASSED                                 [ 81%]
+test_grades.py::test_sixty_nine_is_a_d PASSED                            [ 87%]
+test_grades.py::test_seventy_is_a_c PASSED                               [ 93%]
+test_grades.py::test_negative_score_is_rejected PASSED                   [100%]
+
+============================== 16 passed in 0.01s ==============================
+
+$ ruff check .
+All checks passed!
+
+$ ruff format .
+4 files left unchanged
+
+$ pylint fees.py
+
+------------------------------------
+Your code has been rated at 10.00/10
+
