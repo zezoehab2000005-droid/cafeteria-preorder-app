@@ -1,0 +1,268 @@
+$ ruff check legacy_fees.py
+F401 [*] `os` imported but unused
+ --> legacy_fees.py:1:8
+  |
+1 | import os
+  |        ^^
+2 | import math
+  |
+help: Remove unused import: `os`
+  |
+  - import os
+1 | import math
+  |
+
+F401 [*] `math` imported but unused
+ --> legacy_fees.py:2:8
+  |
+1 | import os
+2 | import math
+  |        ^^^^
+3 |
+4 | def calc(d, t, y, s, disc, extra=[]):
+  |
+help: Remove unused import: `math`
+  |
+1 | import os
+  - import math
+2 |
+  |
+
+C901 `calc` is too complex (9 > 5)
+ --> legacy_fees.py:4:5
+  |
+2 | import math
+3 |
+4 | def calc(d, t, y, s, disc, extra=[]):
+  |     ^^^^
+5 |     # t: 1=student, 2=staff child, 3=scholarship
+6 |     total = 0
+  |
+
+PLR0913 Too many arguments in function definition (6 > 5)
+ --> legacy_fees.py:4:5
+  |
+2 | import math
+3 |
+4 | def calc(d, t, y, s, disc, extra=[]):
+  |     ^^^^
+5 |     # t: 1=student, 2=staff child, 3=scholarship
+6 |     total = 0
+  |
+
+PLR0917 Too many positional arguments (6 > 5)
+ --> legacy_fees.py:4:5
+  |
+2 | import math
+3 |
+4 | def calc(d, t, y, s, disc, extra=[]):
+  |     ^^^^
+5 |     # t: 1=student, 2=staff child, 3=scholarship
+6 |     total = 0
+  |
+
+ARG001 Unused function argument: `y`
+ --> legacy_fees.py:4:16
+  |
+2 | import math
+3 |
+4 | def calc(d, t, y, s, disc, extra=[]):
+  |                ^
+5 |     # t: 1=student, 2=staff child, 3=scholarship
+6 |     total = 0
+  |
+
+B006 Do not use mutable data structures for argument defaults
+ --> legacy_fees.py:4:34
+  |
+2 | import math
+3 |
+4 | def calc(d, t, y, s, disc, extra=[]):
+  |                                  ^^
+5 |     # t: 1=student, 2=staff child, 3=scholarship
+6 |     total = 0
+  |
+help: Replace with `None`; initialize within function
+  |
+3 |
+  - def calc(d, t, y, s, disc, extra=[]):
+4 + def calc(d, t, y, s, disc, extra=None):
+5 |     # t: 1=student, 2=staff child, 3=scholarship
+6 +     if extra is None:
+7 +         extra = []
+8 |     total = 0
+  |
+note: This is an unsafe fix and may change runtime behavior
+
+PLR2004 Magic value used in comparison, consider replacing `2` with a constant variable
+  --> legacy_fees.py:10:19
+   |
+ 8 |         if t == 1:
+ 9 |             total = total + c["h"] * 350
+10 |         elif t == 2:
+   |                   ^
+11 |             total = total + c["h"] * 350 * 0.5
+12 |         elif t == 3:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `3` with a constant variable
+  --> legacy_fees.py:12:19
+   |
+10 |         elif t == 2:
+11 |             total = total + c["h"] * 350 * 0.5
+12 |         elif t == 3:
+   |                   ^
+13 |             total = total + 0
+14 |     if total > 6000:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `6000` with a constant variable
+  --> legacy_fees.py:14:16
+   |
+12 |         elif t == 3:
+13 |             total = total + 0
+14 |     if total > 6000:
+   |                ^^^^
+15 |         total = total - 200
+16 |     if s == True:
+   |
+
+E712 Avoid equality comparisons to `True`; use `s:` for truth checks
+  --> legacy_fees.py:16:8
+   |
+14 |     if total > 6000:
+15 |         total = total - 200
+16 |     if s == True:
+   |        ^^^^^^^^^
+17 |         total = total + 150
+18 |     if disc != None:
+   |
+help: Replace with `s`
+   |
+15 |         total = total - 200
+   -     if s == True:
+16 +     if s:
+17 |         total = total + 150
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+E711 Comparison to `None` should be `cond is not None`
+  --> legacy_fees.py:18:16
+   |
+16 |     if s == True:
+17 |         total = total + 150
+18 |     if disc != None:
+   |                ^^^^
+19 |         total = total - disc
+20 |     for e in extra:
+   |
+help: Replace with `cond is not None`
+   |
+17 |         total = total + 150
+   -     if disc != None:
+18 +     if disc is not None:
+19 |         total = total - disc
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+F841 Local variable `tmp` is assigned to but never used
+  --> legacy_fees.py:22:5
+   |
+20 |     for e in extra:
+21 |         total = total + e
+22 |     tmp = total * 1.0
+   |     ^^^
+23 |     return total
+   |
+help: Remove assignment to unused variable `tmp`
+   |
+21 |         total = total + e
+   -     tmp = total * 1.0
+22 +     total * 1.0
+23 |     return total
+   |
+note: This is an unsafe fix and may change runtime behavior
+
+PLR2004 Magic value used in comparison, consider replacing `2` with a constant variable
+  --> legacy_fees.py:29:15
+   |
+27 |     if t == 1:
+28 |         print("Student fee: " + str(x))
+29 |     elif t == 2:
+   |               ^
+30 |         print("Staff child fee: " + str(x))
+31 |     if x > 6000:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `6000` with a constant variable
+  --> legacy_fees.py:31:12
+   |
+29 |     elif t == 2:
+30 |         print("Staff child fee: " + str(x))
+31 |     if x > 6000:
+   |            ^^^^
+32 |         print("High fee")
+33 |     return x
+   |
+
+N802 Function name `ProcessAll` should be lowercase
+  --> legacy_fees.py:35:5
+   |
+33 |     return x
+34 |
+35 | def ProcessAll(students):
+   |     ^^^^^^^^^^
+36 |     for st in students:
+37 |         if st["type"] == 1:
+   |
+
+PLR2004 Magic value used in comparison, consider replacing `2` with a constant variable
+  --> legacy_fees.py:39:26
+   |
+37 |         if st["type"] == 1:
+38 |             fee = calc(st["courses"], 1, 2026, st["summer"], None)
+39 |         if st["type"] == 2:
+   |                          ^
+40 |             fee = calc(st["courses"], 2, 2026, st["summer"], None)
+41 |         print(st["name"], fee)
+   |
+
+Found 17 errors.
+[*] 2 fixable with `--fix` (4 unsafe fixes available with `--fix --unsafe-fixes`).
+
+$ ruff check legacy_fees.py --statistics
+6	PLR2004	[ ] magic-value-comparison
+2	F401   	[*] unused-import
+1	C901   	[ ] complex-structure
+1	N802   	[ ] invalid-function-name
+1	B006   	[ ] mutable-argument-default
+1	E711   	[ ] none-comparison
+1	PLR0913	[ ] too-many-arguments
+1	PLR0917	[ ] too-many-positional-arguments
+1	E712   	[ ] true-false-comparison
+1	ARG001 	[ ] unused-function-argument
+1	F841   	[ ] unused-variable
+Found 17 errors.
+[*] 2 fixable with `--fix` (4 unsafe fixes available with `--fix --unsafe-fixes`).
+
+$ pylint legacy_fees.py
+************* Module legacy_fees
+legacy_fees.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+legacy_fees.py:4:0: C0116: Missing function or method docstring (missing-function-docstring)
+legacy_fees.py:4:0: W0102: Dangerous default value [] as argument (dangerous-default-value)
+legacy_fees.py:4:0: R0913: Too many arguments (6/5) (too-many-arguments)
+legacy_fees.py:4:0: R0917: Too many positional arguments (6/5) (too-many-positional-arguments)
+legacy_fees.py:16:7: C0121: Comparison 's == True' should be 's is True' if checking for the singleton value True, or 's' if testing for truthiness (singleton-comparison)
+legacy_fees.py:18:7: C0121: Comparison 'disc != None' should be 'disc is not None' (singleton-comparison)
+legacy_fees.py:4:15: W0613: Unused argument 'y' (unused-argument)
+legacy_fees.py:22:4: W0612: Unused variable 'tmp' (unused-variable)
+legacy_fees.py:25:0: C0116: Missing function or method docstring (missing-function-docstring)
+legacy_fees.py:35:0: C0116: Missing function or method docstring (missing-function-docstring)
+legacy_fees.py:35:0: C0103: Function name "ProcessAll" doesn't conform to snake_case naming style (invalid-name)
+legacy_fees.py:41:26: E0606: Possibly using variable 'fee' before assignment (possibly-used-before-assignment)
+legacy_fees.py:1:0: W0611: Unused import os (unused-import)
+legacy_fees.py:2:0: W0611: Unused import math (unused-import)
+
+-----------------------------------
+Your code has been rated at 4.86/10
+
