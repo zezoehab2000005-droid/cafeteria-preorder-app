@@ -1,0 +1,21 @@
+ef61ed6 Add lab6 tooling config
+37c3b59 red: register adds credit hours
+befefe1 green: Student.register adds hours
+711a1d7 refactor: keep courses in a dict, total_hours is computed
+c4dd419 red: refuse registration over 18 hours
+28ffd6d green: raise RegistrationError over 18 hours
+62ed029 refactor: replace magic number 18 with MAX_HOURS
+b34c636 red: refuse a duplicate course
+b5137db green: raise RegistrationError for a duplicate course
+955f77e red: drop removes a course
+1dd4f53 green: Student.drop removes the course
+1b7b50b red: dropping an unregistered course is refused
+40d7dbc green: drop raises RegistrationError for unknown course (100% coverage)
+bfd634e Add registration feature and step definitions
+c5629fb Add drop scenarios to registration.feature (Task B1)
+4bca1e0 Add legacy invoice and characterization tests
+768cba1 refactor: replace kind conditional with fee policy classes (Task C2)
+f3dece4 red: invoice text goes to an injected writer
+ca0a25f green: inject FileWriter, remove print from make_invoice
+405099b red: sibling students get a discount
+4c15107 green: add SiblingPolicy (no change to make_invoice)

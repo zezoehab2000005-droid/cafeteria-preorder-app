@@ -1,0 +1,22 @@
+$ pytest --cov=registration --cov=invoice --cov-report=term-missing
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.2.0, pluggy-1.7.0
+rootdir: lab6
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collected 10 items
+
+tests\test_invoice_characterization.py .....                             [ 50%]
+tests\test_registration.py .....                                         [100%]
+
+=============================== tests coverage ================================
+______________ coverage: platform win32, python 3.12.10-final-0 _______________
+
+Name              Stmts   Miss  Cover   Missing
+-----------------------------------------------
+invoice.py           27      0   100%
+registration.py      20      0   100%
+-----------------------------------------------
+TOTAL                47      0   100%
+============================= 10 passed in 0.11s ==============================
