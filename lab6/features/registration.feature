@@ -31,3 +31,13 @@ Feature: Course registration
       | 12      | 3     | accepted |
       | 15      | 3     | accepted |
       | 16      | 3     | refused  |
+
+  Scenario: Drop a registered course
+    Given the student is registered for "SET312" worth 3 hours
+    When the student drops "SET312"
+    Then the student has 0 registered hours
+
+  Scenario: Refuse to drop a course that is not registered
+    When the student drops "SET999"
+    Then the registration is refused with "not registered"
+    And the student has 0 registered hours

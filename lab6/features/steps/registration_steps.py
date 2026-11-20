@@ -28,6 +28,14 @@ def step_register(context, code, hours):
         context.error = str(e)
 
 
+@when('the student drops "{code}"')
+def step_drop(context, code):
+    try:
+        context.student.drop(code)
+    except RegistrationError as e:
+        context.error = str(e)
+
+
 @then("the student has {n:d} registered hours")
 def step_hours(context, n):
     assert context.student.total_hours == n
