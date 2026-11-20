@@ -52,13 +52,12 @@ def tuition_fee(courses, kind, summer=False, discount=0, extras=()):
     return total - discount + sum(extras)
 
 
-def fee_report(courses, kind, summer=False, discount=0):
-    """Print the fee for one student and return it."""
-    fee = tuition_fee(courses, kind, summer, discount)
-    print(f"{REPORT_LABELS[kind]}: {fee}")
+def fee_report(fee, kind):
+    """Return the report lines for a fee (calculation and printing are now separate)."""
+    lines = [f"{REPORT_LABELS[kind]}: {fee}"]
     if fee > LARGE_FEE_THRESHOLD:
-        print("High fee")
-    return fee
+        lines.append("High fee")
+    return "\n".join(lines)
 
 
 def process_all(students):
